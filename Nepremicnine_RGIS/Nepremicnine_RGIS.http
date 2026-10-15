@@ -1,0 +1,6 @@
+@Nepremicnine_RGIS_HostAddress = http://localhost:5216
+
+GET {{Nepremicnine_RGIS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
