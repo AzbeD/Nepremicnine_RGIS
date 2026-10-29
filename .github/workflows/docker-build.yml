@@ -5,6 +5,9 @@ on:
       - main
       - master
 
+env:
+  AZURE_WEBAPP_NAME: nepremicnine-rgis
+  IMAGE_NAME: nepremicnine_rgis
 
 jobs:
   build:
@@ -43,6 +46,14 @@ jobs:
           file: ./Nepremicnine_RGIS/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/nepremicnine_rgis:latest
-            ${{ secrets.DOCKER_USERNAME }}/nepremicnine_rgis:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.DOCKER_USERNAME }}/%{{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: index.docker.io/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+        
 
