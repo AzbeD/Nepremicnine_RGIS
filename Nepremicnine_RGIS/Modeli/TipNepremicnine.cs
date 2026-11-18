@@ -1,0 +1,1 @@
+public enum TipNepremicnine { Soba, Stanovanje, Hisa }
