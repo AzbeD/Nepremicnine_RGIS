@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Nepremicnine_RGIS.Tests/Nepremicnine_RGIS.Tests.csproj" Id="eb71e538-c0c7-4d9c-834b-930d9f03a22f" />
   <Project Path="Nepremicnine_RGIS/Nepremicnine_RGIS.csproj" />
 </Solution>
