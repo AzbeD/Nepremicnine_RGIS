@@ -25,6 +25,49 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore
+        run: dotnet restore Nepremicnine_RGIS.Tests
+
+      - name: Build
+        run: dotnet build Nepremicnine_RGIS.Tests --configuration Release --no-restore
+
+      - name: Run MSTest Tests 
+        run: >
+          dotnet test Nepremicnine_RGIS.Tests
+          --configuration Release --no-build
+          --logger "trx;LogFileName=test-results.trx"
+          --collect "Code Coverage;Format=cobertura"
+          --results-directory TestResults
+      
+      - name: Test report
+        uses: dorny/test-reporter@v2
+        if: always()
+        with:
+          name: MSTest rezultati
+          path: TestResults/*.trx
+          reporter: dotnet-trx
+      
+      - name: Coverage report
+        uses: danielpalme/ReportGenerator-Github-Action@v5
+        if: always()
+        with: 
+          reports: TestResults/**/*.cobertura.xml
+          targetdir: CoverageReport
+          reporttypes: HtmlInLine;MarkdownSummaryGithub
+
+      - name: CoverageSummary
+        if: always()
+        run: cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:  
+          name: test-results
+          path: |
+            TestResults
+            CoverageReport
+
+      - name: Restore
         run: dotnet restore Nepremicnine_RGIS/Nepremicnine_RGIS.csproj
 
       - name: Build
