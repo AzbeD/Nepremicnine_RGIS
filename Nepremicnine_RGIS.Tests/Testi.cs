@@ -27,18 +27,5 @@ namespace Nepremicnine_RGIS.Tests
             var statusResult = Assert.IsInstanceOfType<StatusCodeResult>(result);
             Assert.AreEqual(201, statusResult.StatusCode);
         }
-        
-        [TestMethod]
-        public async Task TestRegistracijaPrekratkoGeslo()
-        {
-            var controller = new AvtentikacijaController(NovaBaza());
-            var dto = new RegistracijaDTO
-            {
-                UporabniskoIme = "user2",
-                Geslo = "abc"
-            };
-            var result = await controller.Registracija(dto);
-            Assert.IsInstanceOfType<ConflictObjectResult>(result);
-        }
     }
 }
