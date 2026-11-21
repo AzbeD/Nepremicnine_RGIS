@@ -14,11 +14,6 @@ public class BazaContext : DbContext
     public DbSet<BlokiranUporabnik> BlokiraniUporabniki { get; set; }
     public DbSet<Prijava> Prijave { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite("Data Source=nepremicnine.db");
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
             modelBuilder.Entity<Uporabnik>()
