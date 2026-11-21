@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 public class BazaContext : DbContext
 {
+    public BazaContext(DbContextOptions<BazaContext> options) : base(options){}
+
+
     public DbSet<Uporabnik> Uporabniki { get; set; }
     public DbSet<Oglas> Oglasi { get; set; }
     public DbSet<Povprasevanje> Povprasevanja { get; set; }

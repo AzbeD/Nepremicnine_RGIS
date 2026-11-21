@@ -1,1 +1,1 @@
-public enum VlogaUporabnika { Kupec, Prodajalec, Administrator }
+public enum VlogaUporabnika { Uporabnik, Administrator }
